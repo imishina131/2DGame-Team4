@@ -53,5 +53,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidBody.AddForce(new Vector2(playerRigidBody.velocity.x, jump));
         }
+
+        // the player attack with a fireball
     }
 }
