@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 
@@ -12,7 +13,6 @@ public class EnemyBehaviour : MonoBehaviour
     public float rayCastLength;
     public float attackDistance;
     public float moveSpeed;
-    public float timer;
     public GameObject player;
 
     private RaycastHit2D hit;
@@ -21,23 +21,20 @@ public class EnemyBehaviour : MonoBehaviour
     private float distance;
     bool attackMode;
     bool inRange;
-    bool cooling;
-    float intTimer;
     Vector3 scale;
     float scaleX;
+    Player playerInstance;
 
     void Awake()
     {
-        intTimer = timer;
         animation = GetComponent<Animator>();
         scale = transform.localScale;
         scaleX = scale.x;
+        playerInstance = new Player();
     }
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("hit.collider" + hit.collider);
-        Debug.Log("inRange" + inRange);
         Vector3 scale = transform.localScale;
         if(inRange)
         {
@@ -52,12 +49,10 @@ public class EnemyBehaviour : MonoBehaviour
                 hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
             }
             transform.localScale = scale;
-            RaycastDebugger();
         }
 
         if(hit.collider != null)
         {
-            Debug.Log("hi");
             EnemyLogic();
         }
         
@@ -76,21 +71,16 @@ public class EnemyBehaviour : MonoBehaviour
     void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.transform.position);
-        if(distance > attackDistance)
+        if (distance > attackDistance)
         {
             Move();
             StopAttack();
         }
-        else if(attackDistance >= distance && cooling == false)
+        else if (attackDistance >= distance)
         {
             Attack();
         }
 
-        if(cooling)
-        {
-            CoolDown();
-            animation.SetBool("Attack", false);
-        }
     }
 
     void Move()
@@ -105,20 +95,17 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Attack()
     {
-        timer = intTimer;
         attackMode = true;
-
         animation.SetBool("canWalk", false);
         animation.SetBool("Attack", true);
-        CoolDown();
-        Debug.Log("hello");
+        playerInstance.TakeDamage();
+
     }
 
     void StopAttack()
     {
-        cooling = false;
-        attackMode = false;
         animation.SetBool("Attack", false);
+        attackMode = false;
     }
 
     void OnTriggerStay2D(Collider2D trigger)
@@ -130,30 +117,9 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    void RaycastDebugger()
-    {
-        if(distance > attackDistance)
-        {
-            Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength,Color.red);
-        }
-        else if(distance < attackDistance)
-        {
-            Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength,Color.green);
-        }
-    }
-
-    void CoolDown()
-    {
-        timer -= Time.deltaTime;
-        if(timer <= 0 && cooling && attackMode)
-        {
-            cooling = false;
-            timer = intTimer;
-        }
-    }
-
     public void TriggerCooling()
     {
-        cooling = true;
+        //create cooldown here
     }
+
 }
