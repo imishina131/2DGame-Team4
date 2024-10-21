@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     float moveSpeed = 5;
     Rigidbody2D playerRigidBody;
-    float jump = 250;
+    float jump = 500;
     Vector3 characterScale;
     float characterScaleX;
     // Start is called before the first frame update
