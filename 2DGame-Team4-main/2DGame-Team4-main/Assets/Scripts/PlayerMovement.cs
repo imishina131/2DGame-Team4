@@ -22,19 +22,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        /*if (Input.GetKey(KeyCode.D))
-        {
-            characterScale.x = 10;
-            transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
-        }
-
-        if(Input.GetKey(KeyCode.A))
-        {
-            characterScale.x = -10;
-            transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
-        }
-        */
-
         transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0f, 0f);
 
         if (Input.GetAxis("Horizontal") < 0)
