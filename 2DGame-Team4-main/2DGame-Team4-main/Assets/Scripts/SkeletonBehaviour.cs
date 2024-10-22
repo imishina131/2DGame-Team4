@@ -169,7 +169,6 @@ public class SkeletonBehaviour : MonoBehaviour
             attackMode = true;    
             animation.SetBool("canWalk", false);
             animation.SetBool("Attack", true);
-            playerInstance.TakeDamage();
             
         }
 

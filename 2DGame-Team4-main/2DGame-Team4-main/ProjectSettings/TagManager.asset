@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - AugmentHealth
+  - Ground
+  - Portal
+  - Deathzone
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - Player
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 

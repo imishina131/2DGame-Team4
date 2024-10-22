@@ -161,11 +161,9 @@ public class TemporarySkeletonBehaviour : MonoBehaviour
     {
         if (attackMode == false) 
         {
-            Debug.Log("attack");
             attackMode = true;    
             animation.SetBool("canWalk", false);
             animation.SetBool("Attack", true);
-            playerInstance.TakeDamage();
             
         }
 
@@ -175,7 +173,6 @@ public class TemporarySkeletonBehaviour : MonoBehaviour
     {
         if (attackMode == true) 
         {
-            Debug.Log("stop attack");
             animation.SetBool("Attack", false);
             attackMode = false;
         }
@@ -186,7 +183,6 @@ public class TemporarySkeletonBehaviour : MonoBehaviour
     {
         if(trigger.gameObject.tag == "Player")
         {
-            Debug.Log("OnStay");
             target = trigger.gameObject;
         }
     }

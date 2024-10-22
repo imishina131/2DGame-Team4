@@ -71,7 +71,6 @@ public class EnemyBehaviour : MonoBehaviour
         else 
         {
             animation.SetBool("canWalk", false);
-            Debug.Log("before stop attack - 2");
             StopAttack();
 
         }
@@ -125,7 +124,6 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else 
         {
-            Debug.Log("before stop attack");
             Move();
             StopAttack();
         }
@@ -157,11 +155,9 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (attackMode == false) 
         {
-            Debug.Log("attack");
             attackMode = true;    
             animation.SetBool("canWalk", false);
             animation.SetBool("Attack", true);
-            playerInstance.TakeDamage();
             
         }
 
@@ -171,7 +167,6 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (attackMode == true) 
         {
-            Debug.Log("stop attack");
             animation.SetBool("Attack", false);
             attackMode = false;
         }

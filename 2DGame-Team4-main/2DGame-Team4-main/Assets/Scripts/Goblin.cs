@@ -10,5 +10,11 @@ public class Goblin : MonoBehaviour
     public void TakeDamage()
     {
         health -= 25;
+        Debug.Log("Goblin: " + health);
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
