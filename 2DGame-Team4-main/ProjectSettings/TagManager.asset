@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - AugmentHealth
+  - Ground
+  - Portal
+  - Deathzone
   layers:
   - Default
   - TransparentFX
@@ -11,6 +15,13 @@ TagManager:
   - 
   - Water
   - UI
+  - 
+  - 
+  - 
+  - 
+  - Player
+  - 
+  - 
   - Ground
   - 
   - 
@@ -30,14 +41,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 1421101623
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
