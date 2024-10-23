@@ -10,5 +10,10 @@ public class SwordDamage : MonoBehaviour
         {
             goblinComponent.TakeDamage();
         }
+
+        if(other.gameObject.TryGetComponent<Skeleton>(out Skeleton skeletonComponent))
+        {
+            skeletonComponent.TakeDamage();
+        }
     }
 }

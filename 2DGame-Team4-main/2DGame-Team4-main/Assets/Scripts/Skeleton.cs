@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour
 {
-    public int health = 100;
+    public int health = 75;
 
 
     public void TakeDamage()
     {
         health -= 25;
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
