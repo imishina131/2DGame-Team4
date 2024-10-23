@@ -6,7 +6,7 @@ using UnityEngine;
 
 //make a cooldown for attacks!!!
 
-public class EnemyBehaviour : MonoBehaviour
+public class SkeletonBehaviour : MonoBehaviour
 {
     public Transform rayCast;
     public LayerMask rayCastMask;
@@ -25,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour
     Vector3 scale;
     float scaleX;
     Player playerInstance;
+    Skeleton skeleton;
 
     bool cooling = false;
 
@@ -34,10 +35,15 @@ public class EnemyBehaviour : MonoBehaviour
         scale = transform.localScale;
         scaleX = scale.x;
         playerInstance = new Player();
+        skeleton = new Skeleton();
     }
     // Update is called once per frame
     void Update()
     {
+        if(skeleton.health <= 0)
+        {
+
+        }
         Vector3 scale = transform.localScale;
 
         // inRange = IsInRange();
@@ -45,6 +51,7 @@ public class EnemyBehaviour : MonoBehaviour
         
         if(target != null && IsInRange())
         {
+            Debug.Log("InRange");
             if(player.transform.position.x > transform.position.x)
             {
                 scale.x = -scaleX;
@@ -71,6 +78,7 @@ public class EnemyBehaviour : MonoBehaviour
         else 
         {
             animation.SetBool("canWalk", false);
+            Debug.Log("before stop attack - 2");
             StopAttack();
 
         }
@@ -124,7 +132,8 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else 
         {
-            Move();
+            Debug.Log("before stop attack");
+            //Move();
             StopAttack();
         }
 /*
@@ -141,20 +150,22 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
-    void Move()
+    /*void Move()
     {
         animation.SetBool("canWalk", true);
-        if(!animation.GetCurrentAnimatorStateInfo(0).IsName("Goblin_attack"))
+        if(!animation.GetCurrentAnimatorStateInfo(0).IsName("Skeleton-Attack-A"))
         {
             Vector2 targetPosition = new Vector2(target.transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition,moveSpeed * Time.deltaTime);
         }
     }
+    */
 
     void Attack()
     {
         if (attackMode == false) 
         {
+            Debug.Log("attack");
             attackMode = true;    
             animation.SetBool("canWalk", false);
             animation.SetBool("Attack", true);
@@ -167,6 +178,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (attackMode == true) 
         {
+            Debug.Log("stop attack");
             animation.SetBool("Attack", false);
             attackMode = false;
         }
@@ -177,6 +189,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if(trigger.gameObject.tag == "Player")
         {
+            Debug.Log("OnStay");
             target = trigger.gameObject;
         }
     }
