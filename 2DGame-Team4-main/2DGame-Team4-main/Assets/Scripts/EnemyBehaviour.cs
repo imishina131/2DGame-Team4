@@ -26,23 +26,19 @@ public class EnemyBehaviour : MonoBehaviour
     float scaleX;
     Player playerInstance;
 
-    bool cooling = false;
-
     void Awake()
     {
         animation = GetComponent<Animator>();
         scale = transform.localScale;
         scaleX = scale.x;
-        playerInstance = new Player();
     }
     // Update is called once per frame
     void Update()
     {
+
         Vector3 scale = transform.localScale;
 
-        // inRange = IsInRange();
 
-        
         if(target != null && IsInRange())
         {
             if(player.transform.position.x > transform.position.x)
@@ -56,51 +52,16 @@ public class EnemyBehaviour : MonoBehaviour
                 hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
             }
             transform.localScale = scale;
-
-            if(hit.collider == null)
-            {
-  //              inRange = false;
-            }
-            else 
-            {
-//                inRange = true;
-            }
-
-            EnemyLogic();
         }
+
         else 
         {
-            animation.SetBool("canWalk", false);
+            animation.SetBool("isWalking", false);
             StopAttack();
 
         }
-
-/*
-        if(inRange == true)
-        {
-            EnemyLogic();
-        } 
-        else 
-        {
-            animation.SetBool("canWalk", false);
-            Debug.Log("before stop attack - 2");
-            StopAttack();
-        }
-  */      
-
-        /*
-        if (cooling == true) {
-            StopAttack();
-            Debug.Log("cooling");
-            cooling = false;
-            animation.SetBool("canWalk", false);
-            animation.SetBool("Attack", false);
-            //StartCoroutine(Cooldown());
-        }
-        */
-
-
     }
+
 
     bool ShouldAttack()
     {
@@ -127,37 +88,27 @@ public class EnemyBehaviour : MonoBehaviour
             Move();
             StopAttack();
         }
-/*
-        if (distance > attackDistance)
-        {
-            Move();
-            StopAttack();
-        }
-        else if (attackDistance >= distance)
-        {
-            Attack();
-        }
-    */
 
     }
 
     void Move()
     {
-        animation.SetBool("canWalk", true);
+        animation.SetBool("isWalking", true);
         if(!animation.GetCurrentAnimatorStateInfo(0).IsName("Goblin_attack"))
         {
             Vector2 targetPosition = new Vector2(target.transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition,moveSpeed * Time.deltaTime);
         }
     }
+    
 
     void Attack()
     {
         if (attackMode == false) 
         {
             attackMode = true;    
-            animation.SetBool("canWalk", false);
-            animation.SetBool("Attack", true);
+            animation.SetBool("isWalking", false);
+            animation.SetBool("isAttacking", true);
             
         }
 
@@ -167,7 +118,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (attackMode == true) 
         {
-            animation.SetBool("Attack", false);
+            animation.SetBool("isAttacking", false);
             attackMode = false;
         }
     }
@@ -189,12 +140,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     IEnumerator Cooldown()
     {
-        animation.SetBool("Attack", false);
+        animation.SetBool("isAttacking", false);
         yield return new WaitForSeconds(4);
         if (ShouldAttack()) 
         {
-            animation.SetBool("Attack", true);
+            animation.SetBool("isAttacking", true);
         }
     }
-
 }
