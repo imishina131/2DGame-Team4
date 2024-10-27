@@ -41,6 +41,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         if(target != null && IsInRange())
         {
+            Debug.Log("target is not null");
             if(player.transform.position.x > transform.position.x)
             {
                 scale.x = -scaleX;
@@ -52,13 +53,14 @@ public class EnemyBehaviour : MonoBehaviour
                 hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
             }
             transform.localScale = scale;
+
+            EnemyLogic();
         }
 
         else 
         {
             animation.SetBool("isWalking", false);
             StopAttack();
-
         }
     }
 
@@ -126,8 +128,10 @@ public class EnemyBehaviour : MonoBehaviour
     
     void OnTriggerStay2D(Collider2D trigger)
     {
+        Debug.Log("Enter");
         if(trigger.gameObject.tag == "Player")
         {
+            Debug.Log("trigger");
             target = trigger.gameObject;
         }
     }

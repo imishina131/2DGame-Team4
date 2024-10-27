@@ -132,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(other.gameObject.tag == "Deathzone")
         {
+            Debug.Log("died");
             player.TriggerDeath();
         }
     }
