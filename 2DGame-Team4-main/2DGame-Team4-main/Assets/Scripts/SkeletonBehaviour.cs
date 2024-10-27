@@ -34,16 +34,11 @@ public class SkeletonBehaviour : MonoBehaviour
         animation = GetComponent<Animator>();
         scale = transform.localScale;
         scaleX = scale.x;
-        playerInstance = new Player();
-        skeleton = new Skeleton();
     }
     // Update is called once per frame
     void Update()
     {
-        if(skeleton.health <= 0)
-        {
 
-        }
         Vector3 scale = transform.localScale;
 
         // inRange = IsInRange();

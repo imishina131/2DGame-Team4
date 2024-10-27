@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     //sound effects
     public AudioClip attack;
     private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,9 +77,8 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            playerRigidBody.AddForce(new Vector2(playerRigidBody.velocity.x, jump));
             animator.SetTrigger("jump");
-            animator.SetBool("walking", false);
+            playerRigidBody.AddForce(new Vector2(playerRigidBody.velocity.x, jump));
         }
 
         if(Input.GetKeyDown(KeyCode.F))

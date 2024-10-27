@@ -6,7 +6,7 @@ public class GoblinDagger : MonoBehaviour
 {
 
 
-   void OnCollisionEnter2D(Collision2D other)
+   void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("hit");
         if(other.gameObject.TryGetComponent<Player>(out Player playerComponent))
