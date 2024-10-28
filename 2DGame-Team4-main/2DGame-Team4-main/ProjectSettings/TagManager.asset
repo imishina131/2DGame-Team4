@@ -8,6 +8,13 @@ TagManager:
   - Ground
   - Portal
   - Deathzone
+  - Spikes
+  - SetHealth
+  - GameMusic
+  - Button
+  - Key
+  - Door
+  - Wizard
   layers:
   - Default
   - TransparentFX

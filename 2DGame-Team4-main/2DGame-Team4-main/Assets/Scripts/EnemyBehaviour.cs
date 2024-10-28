@@ -145,7 +145,7 @@ public class EnemyBehaviour : MonoBehaviour
     IEnumerator Cooldown()
     {
         animation.SetBool("isAttacking", false);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(1.5f);
         if (ShouldAttack()) 
         {
             animation.SetBool("isAttacking", true);

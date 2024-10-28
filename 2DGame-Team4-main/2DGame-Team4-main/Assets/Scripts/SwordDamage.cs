@@ -26,5 +26,11 @@ public class SwordDamage : MonoBehaviour
             audioSource.clip = hit;
             audioSource.Play();
         }
+        else if(other.gameObject.TryGetComponent<Wizard>(out Wizard wizardComponent))
+        {
+            wizardComponent.TakeDamage();
+            audioSource.clip = hit;
+            audioSource.Play();
+        }
     }
 }

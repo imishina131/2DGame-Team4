@@ -12,7 +12,7 @@ public class GoblinDagger : MonoBehaviour
         if(other.gameObject.TryGetComponent<Player>(out Player playerComponent))
         {
             Debug.Log("hit");
-            playerComponent.TakeDamage();
+            playerComponent.TakeDamage(10);
         }
 
     }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour
 {
-    public int health = 75;
+    public int health = 105;
 
 
     public void TakeDamage()
     {
-        health -= 25;
+        health -= 15;
 
         if(health <= 0)
         {

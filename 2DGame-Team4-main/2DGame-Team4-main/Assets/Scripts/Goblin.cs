@@ -5,16 +5,17 @@ using UnityEngine;
 public class Goblin : MonoBehaviour
 {
     public int health = 50;
-
+    public Player player;
 
     public void TakeDamage()
     {
-        health -= 25;
+        health -= 10;
         Debug.Log("Goblin: " + health);
 
         if(health <= 0)
         {
             Destroy(gameObject);
+            player.enemiesKilled ++;
         }
     }
 }

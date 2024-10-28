@@ -198,7 +198,7 @@ public class SkeletonBehaviour : MonoBehaviour
     IEnumerator Cooldown()
     {
         animation.SetBool("Attack", false);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2f);
         if (ShouldAttack()) 
         {
             animation.SetBool("Attack", true);

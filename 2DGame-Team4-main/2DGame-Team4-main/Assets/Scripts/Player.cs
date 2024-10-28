@@ -7,26 +7,35 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    int health = 100;
+    static int health;
+    static int maxHealth;
     public bool isShielded;
     Animator animator;
     private AudioSource audioSource;
     public AudioClip block;
     public AudioClip gethit;
     public AudioClip die;
-    public TMP_Text playerHealth;
+    public HealthBarScript healthBar;
+    public int enemiesKilled = 0;
     
 
     void Start()
     {
+        if(SceneManager.GetActiveScene().name == "Level01")
+        {
+            health = 100;
+            maxHealth = 100;
+            healthBar.SetMaxHealth(maxHealth);
+        }
+        healthBar.SetHealth(health);
+        Debug.Log("Health: " + health);
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        playerHealth.text = "Health: " + health;
     }
 
 
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
         Debug.Log(isShielded);
         if(isShielded)
@@ -39,11 +48,10 @@ public class Player : MonoBehaviour
         {
             if(health > 0)
             {
-                health -= 10;
+                health -= damage;
                 audioSource.clip = gethit;
                 audioSource.Play();
-                Debug.Log(health);
-                playerHealth.text = "Health: " + health;
+                healthBar.SetHealth(health);
             }
         }
 
@@ -67,8 +75,22 @@ public class Player : MonoBehaviour
 
     public void GainHealth()
     {
-        health += 20;
-        playerHealth.text = "Health: " + health;
+        if(health <= 80)
+        {
+            health += 20;
+        }
+        else if(health > 80)
+        {
+            health = maxHealth;
+        }
+        healthBar.SetHealth(health);
+    }
+
+    public void SetHealthForBoss()
+    {
+        maxHealth = 200;
+        health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     IEnumerator Death()
@@ -78,6 +100,8 @@ public class Player : MonoBehaviour
         audioSource.Play();
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
+        maxHealth = 100;
+        health = maxHealth;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
