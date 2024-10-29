@@ -55,7 +55,7 @@ public class UIControlled : MonoBehaviour
 
     public void OnClickCreditsButton()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(6);
     }
 
     public void OnClickBackButton()
