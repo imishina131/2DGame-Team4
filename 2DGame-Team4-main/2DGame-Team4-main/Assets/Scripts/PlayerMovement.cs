@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     bool isGrounded;
     public Player player;
+    public LevelChanger levelChange;
     string sceneName;
     static bool hasKey;
 
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip attack;
     private AudioSource audioSource;
     public AudioClip doorOpens;
+    public AudioClip potionDrank;
 
     // Start is called before the first frame update
     void Start()
@@ -192,13 +194,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if(other.gameObject.tag == "AugmentHealth")
         {
+            audioSource.clip = potionDrank;
+            audioSource.Play();
             player.GainHealth();
             Destroy(other.gameObject);
         }
 
         if(other.gameObject.tag == "Portal")
         {
-            LoadNextLevel();
+            levelChange.FadeOut();
         }
 
         if(other.gameObject.tag == "Deathzone")
@@ -209,6 +213,8 @@ public class PlayerMovement : MonoBehaviour
 
         if(other.gameObject.tag == "SetHealth")
         {
+            audioSource.clip = potionDrank;
+            audioSource.Play();
             player.SetHealthForBoss();
             Destroy(other.gameObject);
         }

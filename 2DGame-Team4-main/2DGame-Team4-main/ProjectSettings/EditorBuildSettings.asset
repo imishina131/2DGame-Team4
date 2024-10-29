@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level02.unity
     guid: d928c15f5a69cba419870ff46491582f
   - enabled: 1
+    path: Assets/Scenes/WinScene01.unity
+    guid: 5eadbe08642fdde49a163502f8b0e2b6
+  - enabled: 1
+    path: Assets/Scenes/WinScene02.unity
+    guid: 46a9002a13dec3a489307eaecfdb182c
+  - enabled: 1
     path: Assets/Scenes/CreditsMenu.unity
     guid: 8cc4a084f05e84c4c80bf6f94cac369a
   m_configObjects: {}

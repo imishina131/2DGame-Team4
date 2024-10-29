@@ -14,7 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float attackDistance;
     public float moveSpeed;
     public GameObject player;
-    public float inRangeDistance;
+    float inRangeDistance = 15;
 
     private RaycastHit2D hit;
     private GameObject target;

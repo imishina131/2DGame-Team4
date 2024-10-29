@@ -7,6 +7,8 @@ public class Wizard : MonoBehaviour
 {
     public int health = 200;
     public Player player;
+    public Animator animator;
+    public LevelChanger levelChange;
 
     public void TakeDamage()
     {
@@ -14,8 +16,14 @@ public class Wizard : MonoBehaviour
 
         if(health <= 0)
         {
-            Destroy(gameObject);
-            SceneManager.LoadScene(4);
+            StartCoroutine(Death());
         }
+    }
+
+    IEnumerator Death()
+    {
+        animator.SetTrigger("Death");
+        yield return new WaitForSeconds(2.2f);
+        levelChange.FadeOut();
     }
 }
